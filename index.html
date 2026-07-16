@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huga Arya Damar Wicaksono — Portofolio Fotografi</title>
+<meta name="description" content="Portofolio fotografi Huga Arya Damar Wicaksono — street, human interest, portrait, dan event photography.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --surface: #141417;
+    --surface-2: #1b1b20;
+    --line: #2a2a30;
+    --text: #eceae4;
+    --muted: #a09c92;
+    --accent: #c9a24b;
+    --accent-soft: rgba(201, 162, 75, .14);
+    --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --sans: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--accent); color: #0c0c0e; }
+
+  /* ---------- Navbar ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem clamp(1.25rem, 5vw, 4rem);
+    transition: background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  .nav.scrolled {
+    background: rgba(12, 12, 14, .92);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--line);
+    padding-top: .75rem; padding-bottom: .75rem;
+  }
+  .nav__logo { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; letter-spacing: .04em; }
+  .nav__logo span { color: var(--accent); }
+  .nav__links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav__links a {
+    font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted);
+    transition: color .25s;
+    position: relative;
+  }
+  .nav__links a::after {
+    content: ''; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px;
+    background: var(--accent); transition: width .3s ease;
+  }
+  .nav__links a:hover { color: var(--text); }
+  .nav__links a:hover::after { width: 100%; }
+  .nav__burger {
+    display: none; background: none; border: 0; cursor: pointer; padding: .4rem;
+  }
+  .nav__burger span {
+    display: block; width: 24px; height: 2px; background: var(--text);
+    margin: 5px 0; transition: transform .3s, opacity .3s;
+  }
+  .nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav__burger.open span:nth-child(2) { opacity: 0; }
+  .nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; min-height: 100svh;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    isolation: isolate; padding: 6rem 1.5rem 4rem;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; z-index: -2;
+    background: url('assets/hero.jpg') center 30% / cover no-repeat;
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(12,12,14,.72) 0%, rgba(12,12,14,.55) 45%, var(--bg) 100%);
+  }
+  .hero__kicker {
+    font-size: .78rem; letter-spacing: .42em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height: 1.12; max-width: 17ch; margin-inline: auto;
+  }
+  .hero__rule {
+    width: 72px; height: 1px; background: var(--accent); margin: 1.8rem auto;
+  }
+  .hero__sub {
+    color: var(--muted); font-size: clamp(.95rem, 2vw, 1.1rem); max-width: 46ch; margin-inline: auto;
+    letter-spacing: .04em;
+  }
+  .hero__cta { margin-top: 2.6rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: .85rem 2.2rem; font-size: .8rem; letter-spacing: .18em;
+    text-transform: uppercase; border: 1px solid var(--accent); transition: all .3s ease;
+    cursor: pointer; font-family: var(--sans); font-weight: 400;
+  }
+  .btn--solid { background: var(--accent); color: #101010; }
+  .btn--solid:hover { background: transparent; color: var(--accent); }
+  .btn--ghost { color: var(--text); border-color: rgba(236,234,228,.35); }
+  .btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero__scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: var(--muted); font-size: .7rem; letter-spacing: .3em; text-transform: uppercase;
+  }
+  .hero__scroll::after {
+    content: ''; display: block; width: 1px; height: 42px; background: linear-gradient(var(--accent), transparent);
+    margin: .6rem auto 0; animation: drip 2s ease-in-out infinite;
+  }
+  @keyframes drip { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem); }
+  .container { max-width: 1200px; margin-inline: auto; }
+  .section-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .section-head--center { text-align: center; }
+  .section-head .eyebrow {
+    font-size: .74rem; letter-spacing: .38em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: .9rem;
+  }
+  .section-head h2 {
+    font-family: var(--serif); font-weight: 600; font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.2;
+  }
+  .section-head p.lead { color: var(--muted); max-width: 60ch; margin-top: 1rem; }
+  .section-head--center p.lead { margin-inline: auto; }
+
+  /* ---------- Gallery ---------- */
+  #galeri { background: var(--bg); }
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2.4vw, 1.75rem);
+  }
+  .card {
+    position: relative; overflow: hidden; cursor: zoom-in; border-radius: 6px;
+    aspect-ratio: 3 / 4; background: var(--surface-2);
+    outline: 1px solid var(--line); outline-offset: -1px;
+  }
+  .card img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.01); transition: transform .8s cubic-bezier(.19,1,.22,1), filter .5s;
+  }
+  .card:hover img { transform: scale(1.07); }
+  .card__veil {
+    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.4rem; opacity: 0; transition: opacity .45s ease;
+    background: linear-gradient(180deg, transparent 40%, rgba(8,8,10,.85) 100%);
+  }
+  .card:hover .card__veil { opacity: 1; }
+  .card__num { font-size: .72rem; letter-spacing: .3em; color: var(--accent); margin-bottom: .35rem; }
+  .card__title { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+  .card__cat { font-size: .78rem; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; margin-top: .25rem; }
+  @media (hover: none) {
+    .card__veil { opacity: 1; background: linear-gradient(180deg, transparent 55%, rgba(8,8,10,.82) 100%); }
+  }
+
+  /* ---------- Lightbox ---------- */
+  .lb {
+    position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center;
+    background: rgba(6,6,8,.96); backdrop-filter: blur(6px);
+    opacity: 0; pointer-events: none; transition: opacity .35s ease;
+  }
+  .lb.open { opacity: 1; pointer-events: auto; }
+  .lb__stage {
+    max-width: min(92vw, 1100px); max-height: 82svh; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lb__stage img {
+    max-width: 100%; max-height: 82svh; object-fit: contain; border-radius: 4px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    transform: scale(.94); transition: transform .35s ease;
+  }
+  .lb.open .lb__stage img { transform: scale(1); }
+  .lb__caption {
+    position: absolute; left: 0; right: 0; bottom: -3.4rem; text-align: center;
+  }
+  .lb__caption .t { font-family: var(--serif); font-size: 1.05rem; }
+  .lb__caption .c { font-size: .74rem; color: var(--muted); letter-spacing: .22em; text-transform: uppercase; margin-top: .15rem; }
+  .lb__btn {
+    position: fixed; z-index: 210; background: rgba(255,255,255,.06); color: var(--text);
+    border: 1px solid rgba(255,255,255,.14); width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    font-size: 1.15rem; transition: all .25s; user-select: none;
+  }
+  .lb__btn:hover { background: var(--accent); color: #101010; border-color: var(--accent); }
+  .lb__close { top: 1.2rem; right: 1.2rem; }
+  .lb__prev { left: 1.2rem; top: 50%; transform: translateY(-50%); }
+  .lb__next { right: 1.2rem; top: 50%; transform: translateY(-50%); }
+  .lb__count {
+    position: fixed; top: 1.75rem; left: 1.75rem; font-size: .8rem; letter-spacing: .3em; color: var(--muted);
+  }
+
+  /* ---------- About ---------- */
+  #tentang { background: var(--surface); border-block: 1px solid var(--line); }
+  .about { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .about__text p { color: var(--muted); margin-bottom: 1.1rem; }
+  .about__text strong { color: var(--text); font-weight: 500; }
+  .about__quote {
+    border-left: 2px solid var(--accent); padding: 1.4rem 1.8rem; background: var(--accent-soft);
+    font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem, 2.4vw, 1.45rem); line-height: 1.55;
+    border-radius: 0 6px 6px 0;
+  }
+  .about__quote small { display: block; margin-top: 1rem; font-family: var(--sans); font-style: normal;
+    font-size: .74rem; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+  .chip {
+    font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--line); padding: .45rem 1rem; border-radius: 999px;
+  }
+
+  /* ---------- Comments ---------- */
+  .comments { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+  .cform { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: clamp(1.5rem, 3.5vw, 2.4rem); }
+  .cform label { display: block; font-size: .74rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: .5rem; }
+  .cform input, .cform textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--line); color: var(--text);
+    padding: .85rem 1rem; font-family: var(--sans); font-size: .95rem; font-weight: 300;
+    border-radius: 4px; margin-bottom: 1.3rem; transition: border-color .25s; resize: vertical;
+  }
+  .cform input:focus, .cform textarea:focus { outline: none; border-color: var(--accent); }
+  .cform textarea { min-height: 120px; }
+  .cform .btn { width: 100%; border-radius: 4px; }
+  .cform .btn[disabled] { opacity: .5; cursor: wait; }
+  .cstatus { font-size: .85rem; margin-top: 1rem; min-height: 1.4em; }
+  .cstatus.ok { color: #7fc97f; }
+  .cstatus.err { color: #e08080; }
+  .clist__head { display: flex; align-items: baseline; gap: .8rem; margin-bottom: 1.6rem; }
+  .clist__head h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+  .clist__head .count { color: var(--accent); font-size: .85rem; letter-spacing: .1em; }
+  .comment {
+    border-bottom: 1px solid var(--line); padding: 1.3rem 0; animation: fadeUp .5s ease both;
+  }
+  .comment__meta { display: flex; align-items: center; gap: .8rem; margin-bottom: .45rem; }
+  .comment__avatar {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(201,162,75,.35);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-weight: 700; font-size: 1rem; text-transform: uppercase;
+  }
+  .comment__name { font-weight: 500; font-size: .95rem; }
+  .comment__time { font-size: .74rem; color: var(--muted); letter-spacing: .06em; }
+  .comment__body { color: var(--muted); font-size: .95rem; padding-left: calc(38px + .8rem); overflow-wrap: anywhere; }
+  .cempty { color: var(--muted); font-style: italic; padding: 1rem 0; }
+  .cloading { color: var(--muted); font-size: .9rem; padding: 1rem 0; }
+
+  /* ---------- Contact ---------- */
+  #kontak { background: var(--surface); border-top: 1px solid var(--line); text-align: center; }
+  .contact__cards { display: flex; justify-content: center; gap: clamp(1rem, 3vw, 2rem); flex-wrap: wrap; margin-top: .5rem; }
+  .ccard {
+    display: flex; align-items: center; gap: 1.1rem; text-align: left;
+    background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+    padding: 1.3rem 1.8rem; min-width: 260px; transition: transform .3s ease, border-color .3s ease;
+  }
+  .ccard:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .ccard__icon {
+    width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+    background: var(--accent-soft); display: flex; align-items: center; justify-content: center;
+  }
+  .ccard__icon svg { width: 22px; height: 22px; fill: var(--accent); }
+  .ccard__label { font-size: .7rem; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
+  .ccard__value { font-weight: 500; font-size: 1rem; letter-spacing: .02em; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 2.2rem clamp(1.25rem, 5vw, 4rem); text-align: center;
+    color: var(--muted); font-size: .8rem; letter-spacing: .08em;
+    border-top: 1px solid var(--line); background: var(--bg);
+  }
+  footer .sig { font-family: var(--serif); color: var(--text); font-size: .95rem; margin-bottom: .3rem; }
+  footer .sig span { color: var(--accent); }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .about { grid-template-columns: 1fr; }
+    .comments { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .nav__links {
+      position: fixed; inset: 0 0 auto 0; top: 0; flex-direction: column; gap: 0;
+      background: rgba(12,12,14,.98); backdrop-filter: blur(14px);
+      padding: 5.5rem 2rem 2rem; transform: translateY(-100%);
+      transition: transform .4s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 20px 40px rgba(0,0,0,.5); z-index: -1;
+    }
+    .nav__links.open { transform: translateY(0); }
+    .nav__links li { border-bottom: 1px solid var(--line); }
+    .nav__links a { display: block; padding: 1.05rem 0; font-size: .9rem; }
+    .nav__burger { display: block; }
+    .grid { grid-template-columns: 1fr; }
+    .lb__prev { left: .6rem; } .lb__next { right: .6rem; }
+    .lb__btn { width: 42px; height: 42px; }
+    .lb__caption { bottom: -3rem; }
+    .comment__body { padding-left: 0; margin-top: .3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="nav" id="nav">
+  <a href="#beranda" class="nav__logo">Huga<span>.</span>Arya</a>
+  <button class="nav__burger" id="burger" aria-label="Menu navigasi" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav__links" id="navLinks">
+    <li><a href="#beranda">Beranda</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#komentar">Komentar</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="beranda">
+  <div>
+    <p class="hero__kicker">Portofolio Fotografi</p>
+    <h1>Huga Arya Damar Wicaksono</h1>
+    <div class="hero__rule"></div>
+    <p class="hero__sub">Menangkap cahaya, cerita, dan momen yang jujur — dari lorong pasar hingga sorak-sorai lapangan sekolah.</p>
+    <div class="hero__cta">
+      <a href="#galeri" class="btn btn--solid">Lihat Karya</a>
+      <a href="#kontak" class="btn btn--ghost">Hubungi Saya</a>
+    </div>
+  </div>
+  <div class="hero__scroll">Gulir</div>
+</header>
+
+<!-- ===== GALLERY ===== -->
+<section id="galeri">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Karya Pilihan</p>
+      <h2>Galeri</h2>
+      <p class="lead">Klik foto untuk melihat dalam ukuran penuh.</p>
+    </div>
+    <div class="grid" id="grid"><!-- kartu foto dirender oleh JS --></div>
+  </div>
+</section>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Pratinjau foto">
+  <span class="lb__count" id="lbCount"></span>
+  <button class="lb__btn lb__close" id="lbClose" aria-label="Tutup">&#10005;</button>
+  <button class="lb__btn lb__prev" id="lbPrev" aria-label="Sebelumnya">&#10094;</button>
+  <button class="lb__btn lb__next" id="lbNext" aria-label="Berikutnya">&#10095;</button>
+  <figure class="lb__stage">
+    <img id="lbImg" src="" alt="">
+    <figcaption class="lb__caption">
+      <div class="t" id="lbTitle"></div>
+      <div class="c" id="lbCat"></div>
+    </figcaption>
+  </figure>
+</div>
+
+<!-- ===== ABOUT ===== -->
+<section id="tentang">
+  <div class="container about">
+    <div class="about__text reveal">
+      <div class="section-head" style="margin-bottom:1.6rem">
+        <p class="eyebrow">Tentang Saya</p>
+        <h2>Bercerita Lewat Lensa</h2>
+      </div>
+      <p>Halo! Saya <strong>Huga Arya Damar Wicaksono</strong>, seorang fotografer yang jatuh cinta pada momen-momen sederhana di sekitar kita: langkah penjual jamu di pagi hari, tawa siswa di tengah kepulan asap warna, hingga raut tenang di balik hiruk-pikuk sebuah acara.</p>
+      <p>Fokus saya ada pada <strong>street photography, human interest, portrait,</strong> dan <strong>dokumentasi acara</strong>. Bagi saya, foto yang baik bukan sekadar tajam dan terang — tetapi mampu membuat orang yang melihatnya ikut merasakan suasananya.</p>
+      <div class="chips">
+        <span class="chip">Street</span>
+        <span class="chip">Human Interest</span>
+        <span class="chip">Portrait</span>
+        <span class="chip">Event</span>
+      </div>
+    </div>
+    <div class="about__quote reveal">
+      “Kamera hanyalah alat. Mata dan hati yang menentukan sebuah cerita layak diabadikan.”
+      <small>— Huga Arya D. W.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMMENTS ===== -->
+<section id="komentar">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Buku Tamu</p>
+      <h2>Gimana Nih Menurut Kalian?</h2>
+      <p class="lead">Tinggalkan kesan, kritik, atau saran untuk karya-karya di atas. Komentar kalian sangat berarti!</p>
+    </div>
+    <div class="comments">
+      <form class="cform reveal" id="cform">
+        <label for="cname">Nama</label>
+        <input type="text" id="cname" maxlength="40" placeholder="Nama kamu" required>
+        <label for="cmsg">Komentar</label>
+        <textarea id="cmsg" maxlength="500" placeholder="Tulis pendapatmu tentang foto-foto di atas..." required></textarea>
+        <button type="submit" class="btn btn--solid" id="csubmit">Kirim Komentar</button>
+        <p class="cstatus" id="cstatus" role="status"></p>
+      </form>
+      <div class="clist reveal">
+        <div class="clist__head">
+          <h3>Komentar</h3>
+          <span class="count" id="ccount"></span>
+        </div>
+        <div id="clist"><p class="cloading">Memuat komentar…</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="kontak">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <p class="eyebrow">Kontak</p>
+      <h2>Mari Berkolaborasi</h2>
+      <p class="lead">Tertarik bekerja sama, memesan sesi foto, atau sekadar menyapa? Hubungi saya melalui:</p>
+    </div>
+    <div class="contact__cards reveal">
+      <a class="ccard" href="https://www.instagram.com/hgrya.dw" target="_blank" rel="noopener">
+        <span class="ccard__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0-2.2C8.7 0 8.3 0 7 .1 5.7.1 4.9.3 4.1.6c-.8.3-1.5.7-2.1 1.4C1.3 2.6.9 3.3.6 4.1.3 4.9.1 5.7.1 7 0 8.3 0 8.7 0 12s0 3.7.1 5c0 1.3.2 2.1.5 2.9.3.8.7 1.5 1.4 2.1.6.7 1.3 1.1 2.1 1.4.8.3 1.6.5 2.9.5 1.3.1 1.7.1 5 .1s3.7 0 5-.1c1.3 0 2.1-.2 2.9-.5.8-.3 1.5-.7 2.1-1.4.7-.6 1.1-1.3 1.4-2.1.3-.8.5-1.6.5-2.9.1-1.3.1-1.7.1-5s0-3.7-.1-5c0-1.3-.2-2.1-.5-2.9-.3-.8-.7-1.5-1.4-2.1C21.4 1.3 20.7.9 19.9.6c-.8-.3-1.6-.5-2.9-.5C15.7 0 15.3 0 12 0z"/><path d="M12 5.8A6.2 6.2 0 1 0 18.2 12 6.2 6.2 0 0 0 12 5.8zm0 10.2A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.4" cy="5.6" r="1.4"/></svg>
+        </span>
+        <span>
+          <span class="ccard__label">Instagram</span><br>
+          <span class="ccard__value">@hgrya.dw</span>
+        </span>
+      </a>
+      <a class="ccard" href="https://wa.me/6281325601178" target="_blank" rel="noopener">
+        <span class="ccard__icon">
+          <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4C6.7 7 6 7.7 6 9.2s1.1 3 1.2 3.2c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.3zM12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.7 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0zm0 21.9c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7 1 1-3.6-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.5 4.5-10 10-10s10 4.5 10 10-4.6 9.9-10.1 9.9z"/></svg>
+        </span>
+        <span>
+          <span class="ccard__label">WhatsApp</span><br>
+          <span class="ccard__value">0813-2560-1178</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p class="sig">Huga<span>.</span>Arya</p>
+  <p>&copy; <span id="year"></span> Huga Arya Damar Wicaksono &mdash; Semua foto dilindungi hak cipta.</p>
+</footer>
+
+<script>
+/* ============ DATA FOTO ============ */
+const PHOTOS = [
+  { thumb: 'assets/thumb-01.jpg', full: 'assets/photo-01.jpg', title: 'Langkah Penjual Jamu',  cat: 'Human Interest' },
+  { thumb: 'assets/thumb-02.jpg', full: 'assets/photo-02.jpg', title: 'Rehat Sejenak',          cat: 'Street' },
+  { thumb: 'assets/thumb-03.jpg', full: 'assets/photo-03.jpg', title: 'Di Balik Panggung',      cat: 'Event' },
+  { thumb: 'assets/thumb-04.jpg', full: 'assets/photo-04.jpg', title: 'Menatap Arah',           cat: 'Portrait' },
+  { thumb: 'assets/thumb-05.jpg', full: 'assets/photo-05.jpg', title: 'Euforia Hijau',          cat: 'Event' },
+];
+
+/* ============ RENDER GALERI ============ */
+const grid = document.getElementById('grid');
+PHOTOS.forEach((p, i) => {
+  const fig = document.createElement('figure');
+  fig.className = 'card reveal';
+  fig.innerHTML = `
+    <img src="${p.thumb}" alt="${p.title} — ${p.cat}" loading="lazy">
+    <figcaption class="card__veil">
+      <span class="card__num">0${i + 1}</span>
+      <span class="card__title">${p.title}</span>
+      <span class="card__cat">${p.cat}</span>
+    </figcaption>`;
+  fig.addEventListener('click', () => openLb(i));
+  grid.appendChild(fig);
+});
+
+/* ============ LIGHTBOX ============ */
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lbImg');
+const lbTitle = document.getElementById('lbTitle');
+const lbCat = document.getElementById('lbCat');
+const lbCount = document.getElementById('lbCount');
+let lbIndex = 0;
+
+function openLb(i) {
+  lbIndex = i;
+  updateLb();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function updateLb() {
+  const p = PHOTOS[lbIndex];
+  lbImg.src = p.full;
+  lbImg.alt = `${p.title} — ${p.cat}`;
+  lbTitle.textContent = p.title;
+  lbCat.textContent = p.cat;
+  lbCount.textContent = `${lbIndex + 1} / ${PHOTOS.length}`;
+}
+function nav(dir) {
+  lbIndex = (lbIndex + dir + PHOTOS.length) % PHOTOS.length;
+  updateLb();
+}
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); nav(-1); });
+document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); nav(1); });
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') nav(-1);
+  if (e.key === 'ArrowRight') nav(1);
+});
+
+/* ============ NAVBAR ============ */
+const navEl = document.getElementById('nav');
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+window.addEventListener('scroll', () => navEl.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+}));
+
+/* ============ REVEAL ON SCROLL ============ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+}, { threshold: .12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ============ KOMENTAR (JSONbin.io) ============ */
+const BIN_ID = '6a5875c2f5f4af5e29960809';
+const BIN_KEY = 'gimana nih menurut kalian?'; // nama properti array komentar di dalam bin
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
+const clist = document.getElementById('clist');
+const ccount = document.getElementById('ccount');
+const cform = document.getElementById('cform');
+const cstatus = document.getElementById('cstatus');
+const csubmit = document.getElementById('csubmit');
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function timeAgo(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  const s = Math.floor((Date.now() - d.getTime()) / 1000);
+  if (s < 60) return 'baru saja';
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m} menit lalu`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h} jam lalu`;
+  const days = Math.floor(h / 24);
+  if (days < 30) return `${days} hari lalu`;
+  return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function extractComments(record) {
+  if (Array.isArray(record?.[BIN_KEY])) return record[BIN_KEY];
+  if (Array.isArray(record?.comments)) return record.comments;
+  return [];
+}
+
+function renderComments(comments) {
+  ccount.textContent = `(${comments.length})`;
+  if (!comments.length) {
+    clist.innerHTML = '<p class="cempty">Belum ada komentar. Jadilah yang pertama!</p>';
+    return;
+  }
+  clist.innerHTML = comments
+    .slice()
+    .sort((a, b) => new Date(b.waktu || 0) - new Date(a.waktu || 0))
+    .map(c => {
+      const nama = escapeHtml(String(c.nama || 'Anonim'));
+      const pesan = escapeHtml(String(c.pesan || ''));
+      const inisial = nama.trim().charAt(0) || '?';
+      return `
+        <div class="comment">
+          <div class="comment__meta">
+            <span class="comment__avatar">${inisial}</span>
+            <span>
+              <span class="comment__name">${nama}</span><br>
+              <span class="comment__time">${timeAgo(c.waktu)}</span>
+            </span>
+          </div>
+          <p class="comment__body">${pesan}</p>
+        </div>`;
+    }).join('');
+}
+
+async function loadComments() {
+  try {
+    const res = await fetch(`${BIN_URL}/latest`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    renderComments(extractComments(data.record));
+  } catch (err) {
+    clist.innerHTML = '<p class="cempty">Gagal memuat komentar. Coba muat ulang halaman.</p>';
+    console.error('Gagal memuat komentar:', err);
+  }
+}
+
+cform.addEventListener('submit', async e => {
+  e.preventDefault();
+  const nama = document.getElementById('cname').value.trim();
+  const pesan = document.getElementById('cmsg').value.trim();
+  if (!nama || !pesan) return;
+
+  csubmit.disabled = true;
+  csubmit.textContent = 'Mengirim…';
+  cstatus.className = 'cstatus';
+  cstatus.textContent = '';
+
+  try {
+    // Ambil data terbaru dulu agar komentar orang lain tidak tertimpa
+    const res = await fetch(`${BIN_URL}/latest`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const record = (data.record && typeof data.record === 'object') ? data.record : {};
+    const comments = extractComments(record);
+    comments.push({ nama, pesan, waktu: new Date().toISOString() });
+    record[BIN_KEY] = comments;
+
+    const put = await fetch(BIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record),
+    });
+    if (!put.ok) throw new Error(`HTTP ${put.status}`);
+
+    renderComments(comments);
+    cform.reset();
+    cstatus.className = 'cstatus ok';
+    cstatus.textContent = 'Terima kasih! Komentarmu berhasil dikirim.';
+  } catch (err) {
+    cstatus.className = 'cstatus err';
+    cstatus.textContent = 'Ups, komentar gagal terkirim. Periksa koneksi lalu coba lagi.';
+    console.error('Gagal mengirim komentar:', err);
+  } finally {
+    csubmit.disabled = false;
+    csubmit.textContent = 'Kirim Komentar';
+  }
+});
+
+loadComments();
+</script>
+</body>
+</html>
